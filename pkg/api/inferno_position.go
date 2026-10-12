@@ -33,7 +33,7 @@ func newInfernoPositionFromInferno(analyzer *Analyzer, inferno *common.Inferno) 
 		Frame:            parser.CurrentFrame(),
 		Tick:             analyzer.currentTick(),
 		RoundNumber:      analyzer.currentRound.Number,
-		UniqueID:         inferno.UniqueID(),
+		UniqueID:         int64(inferno.UniqueID()),
 		ThrowerSteamID64: thrower.SteamID64,
 		ThrowerName:      thrower.Name,
 		X:                inferno.Entity.Position().X,

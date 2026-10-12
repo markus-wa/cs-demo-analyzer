@@ -42,7 +42,7 @@ func newDecoyStartFromGameEvent(analyzer *Analyzer, event events.DecoyStart) *De
 
 	throwerTeam := thrower.Team
 	parser := analyzer.parser
-	projectileID := findGrenadeProjectileID(analyzer, grenade.UniqueID2(), event.Position)
+	projectileID := findGrenadeProjectileID(analyzer, grenade.UniqueID(), event.Position)
 
 	velocity := analyzer.playerVelocity(thrower)
 
@@ -50,7 +50,7 @@ func newDecoyStartFromGameEvent(analyzer *Analyzer, event events.DecoyStart) *De
 		Frame:            parser.CurrentFrame(),
 		Tick:             analyzer.currentTick(),
 		RoundNumber:      analyzer.currentRound.Number,
-		GrenadeID:        grenade.UniqueID2().String(),
+		GrenadeID:        grenade.UniqueID().String(),
 		ProjectileID:     projectileID,
 		X:                event.Position.X,
 		Y:                event.Position.Y,

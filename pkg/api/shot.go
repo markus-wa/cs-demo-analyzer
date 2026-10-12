@@ -81,7 +81,7 @@ func newShot(analyzer *Analyzer, event events.WeaponFire) *Shot {
 		Tick:                   analyzer.currentTick(),
 		RoundNumber:            analyzer.currentRound.Number,
 		WeaponName:             equipmentToWeaponName[event.Weapon.Type],
-		WeaponID:               event.Weapon.UniqueID2().String(),
+		WeaponID:               event.Weapon.UniqueID().String(),
 		X:                      shooter.Position().X,
 		Y:                      shooter.Position().Y,
 		Z:                      shooter.Position().Z,

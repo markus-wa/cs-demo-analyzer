@@ -667,7 +667,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 		}
 
 		currentRound := analyzer.currentRound
-		isDroppedWeapon := slice.Contains(currentRound.weaponsBoughtUniqueIds, event.Weapon.UniqueID2().String())
+		isDroppedWeapon := slice.Contains(currentRound.weaponsBoughtUniqueIds, event.Weapon.UniqueID().String())
 		if isDroppedWeapon {
 			return
 		}
@@ -677,7 +677,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 			return
 		}
 
-		currentRound.weaponsBoughtUniqueIds = append(currentRound.weaponsBoughtUniqueIds, event.Weapon.UniqueID2().String())
+		currentRound.weaponsBoughtUniqueIds = append(currentRound.weaponsBoughtUniqueIds, event.Weapon.UniqueID().String())
 		match.PlayersBuy = append(match.PlayersBuy, newPlayerBuy(analyzer, event))
 	})
 
@@ -982,7 +982,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 		if lastGrenadeShotExist == nil {
 			fmt.Println("A projectile throw event occurred whereas its weapon fired event didn't occurred.")
 		} else {
-			lastGrenadeShotExist.ProjectileID = projectile.UniqueID()
+			lastGrenadeShotExist.ProjectileID = int64(projectile.UniqueID())
 			delete(analyzer.lastGrenadeThrownByPlayer, thrower.SteamID64)
 		}
 	})

@@ -2,18 +2,19 @@ package api
 
 import (
 	"github.com/golang/geo/r3"
-	"github.com/oklog/ulid/v2"
+
+	"github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/common"
 )
 
 // findGrenadeProjectileID returns the unique ID of the live projectile thrown with the given grenade.
 // A player may have thrown several projectiles with the same grenade (weapon instances are re-used
 // across throws), in that case the closest one to the event position is the right one.
-func findGrenadeProjectileID(analyzer *Analyzer, grenadeUniqueID ulid.ULID, eventPosition r3.Vector) int64 {
+func findGrenadeProjectileID(analyzer *Analyzer, grenadeUniqueID common.UniqueID, eventPosition r3.Vector) int64 {
 	var projectileID int64
 	bestDistance := -1.0
 	bestEntityID := -1
 	for _, projectile := range analyzer.parser.GameState().GrenadeProjectiles() {
-		if projectile.WeaponInstance.UniqueID2() != grenadeUniqueID {
+		if projectile.WeaponInstance.UniqueID() != grenadeUniqueID {
 			continue
 		}
 
@@ -26,7 +27,7 @@ func findGrenadeProjectileID(analyzer *Analyzer, grenadeUniqueID ulid.ULID, even
 		if isCloser || isSameDistanceWithLowerEntityID {
 			bestDistance = distance
 			bestEntityID = entityID
-			projectileID = projectile.UniqueID()
+			projectileID = int64(projectile.UniqueID())
 		}
 	}
 
