@@ -102432,11 +102432,11 @@
       "throwerName": "ERXN",
       "throwerSide": 3,
       "throwerTeamName": "Team FjobX",
-      "throwerVelocityX": -76418.046875,
-      "throwerVelocityY": -76985.859375,
-      "throwerVelocityZ": 545.58984375,
+      "throwerVelocityX": 0,
+      "throwerVelocityY": 0,
+      "throwerVelocityZ": 0,
       "throwerPitch": 16.925812,
-      "throwerYaw": 11.88446
+      "throwerYaw": 11.840515
     },
     {
       "frame": 51533,
@@ -103811,7 +103811,7 @@
       "throwerSteamId": 76561198024687209,
       "throwerName": "sWan_",
       "throwerSide": 2,
-      "throwerTeamName": "Team FjobX",
+      "throwerTeamName": "Team svennerN",
       "throwerVelocityX": 0,
       "throwerVelocityY": 0,
       "throwerVelocityZ": 0,

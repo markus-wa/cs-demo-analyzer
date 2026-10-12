@@ -111418,8 +111418,8 @@
       "throwerName": "LaR",
       "throwerSide": 2,
       "throwerTeamName": "ForeFeit B",
-      "throwerVelocityX": 0,
-      "throwerVelocityY": 0,
+      "throwerVelocityX": 233.421875,
+      "throwerVelocityY": -34.796875,
       "throwerVelocityZ": 0,
       "throwerPitch": 8.21022,
       "throwerYaw": -8.045074
@@ -114738,11 +114738,11 @@
       "throwerName": "Rooftop Korean BBQ",
       "throwerSide": 2,
       "throwerTeamName": "Trelleborg Marine Systems DK",
-      "throwerVelocityX": 0,
-      "throwerVelocityY": 0,
+      "throwerVelocityX": -121.921875,
+      "throwerVelocityY": -3.921875,
       "throwerVelocityZ": 0,
-      "throwerPitch": 17.3172,
-      "throwerYaw": -61.44516
+      "throwerPitch": 17.377289,
+      "throwerYaw": -61.50524
     },
     {
       "frame": 117665,
