@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
@@ -17,6 +18,7 @@ import (
 	"github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/common"
 	events "github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/events"
 	"github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/msg"
+	"github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/option"
 	st "github.com/markus-wa/demoinfocs-golang/v6/pkg/demoinfocs/sendtables"
 )
 
@@ -116,11 +118,11 @@ func analyzeDemo(demoPath string, options AnalyzeDemoOptions) (*Match, error) {
 	}
 	defer file.Close()
 
-	parserConfig := dem.DefaultParserConfig
-	parserConfig.NetMessageDecryptionKey = demo.NetMessageDecryptionPublicKey
-	parserConfig.DisableMimicSource1Events = demo.Type == constants.DemoTypePOV
-
-	parser := dem.NewParserWithConfig(file, parserConfig)
+	parser := dem.NewParser(
+		file,
+		option.NetMessageDecryptionKey(demo.NetMessageDecryptionPublicKey),
+		option.DisableMimicSource1Events(demo.Type == constants.DemoTypePOV),
+	)
 	defer parser.Close()
 
 	source := options.Source
@@ -225,7 +227,7 @@ func analyzeDemo(demoPath string, options AnalyzeDemoOptions) (*Match, error) {
 		})
 	}
 
-	err = parser.ParseToEnd()
+	err = parser.ParseToEnd(context.Background())
 	// Do not stop if the demo is corrupted, usually the error occurs at the end of the parsing.
 	// Depending on how far we were able to parse the demo we may still have data.
 	isCorruptedDemo := errors.Is(err, dem.ErrUnexpectedEndOfDemo)
