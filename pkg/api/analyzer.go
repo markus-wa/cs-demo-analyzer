@@ -33,7 +33,7 @@ const (
 )
 
 type Analyzer struct {
-	parser             dem.Parser
+	parser             *dem.Parser
 	match              *Match
 	currentRound       *Round
 	matchStarted       func() bool
@@ -61,7 +61,7 @@ type Analyzer struct {
 	// Because several hostages can be untied at the same time, we keep track of players that started untying hostages
 	// to detect which player is untying an hostage in case of consecutive events.
 	playersUntyingAnHostage map[uint64]int
-	chickenEntities         []st.Entity
+	chickenEntities         []*st.Entity
 	// Players position at the end of the previous frame, only maintained for demos recorded before the AnimGraph 2
 	// update to compute players velocity based on the previous/current frames positions.
 	previousFramePositions map[*common.Player]r3.Vector
@@ -1181,7 +1181,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 
 	parser.RegisterEventHandler(func(event events.DataTablesParsed) {
 		serverClasses := parser.ServerClasses()
-		serverClasses.FindByName("CChicken").OnEntityCreated(func(entity st.Entity) {
+		serverClasses.FindByName("CChicken").OnEntityCreated(func(entity *st.Entity) {
 			analyzer.chickenEntities = append(analyzer.chickenEntities, entity)
 		})
 
@@ -1232,7 +1232,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 			// We don't have the problem with CS2 demos because the parser dispatch bomb events using props updates
 			// rather than game events.
 			// TODO move it to demoinfocs?
-			serverClasses.FindByName("CPlantedC4").OnEntityCreated(func(bombEntity st.Entity) {
+			serverClasses.FindByName("CPlantedC4").OnEntityCreated(func(bombEntity *st.Entity) {
 				// Old CSGO demos don't have these properties (~ before end of 2018).
 				siteProp := bombEntity.Property("m_nBombSite")
 				defuserProp := bombEntity.Property("m_hBombDefuser")
@@ -1278,7 +1278,7 @@ func (analyzer *Analyzer) registerCommonHandlers(includePositions bool) {
 			})
 		}
 
-		serverClasses.FindByName("CCSGameRulesProxy").OnEntityCreated(func(entity st.Entity) {
+		serverClasses.FindByName("CCSGameRulesProxy").OnEntityCreated(func(entity *st.Entity) {
 			// Fallback to detect rounds end for demos missing round end events.
 			// ! Don't use m_eRoundWinReason because it's not available with old demos (at least 2014)
 			roundWinStatusProperty := entity.Property("cs_gamerules_data.m_iRoundWinStatus")

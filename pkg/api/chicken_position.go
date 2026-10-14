@@ -13,7 +13,7 @@ type ChickenPosition struct {
 	Z           float64 `json:"z"`
 }
 
-func newChickenPositionFromEntity(analyzer *Analyzer, entity sendtables.Entity) *ChickenPosition {
+func newChickenPositionFromEntity(analyzer *Analyzer, entity *sendtables.Entity) *ChickenPosition {
 	parser := analyzer.parser
 
 	return &ChickenPosition{
